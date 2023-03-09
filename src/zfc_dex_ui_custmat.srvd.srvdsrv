@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service definition forZFC_DEX_C_CUSTMAT'
+define service ZFC_DEX_UI_CUSTMAT {
+  expose ZFC_DEX_C_CUSTMAT as Custmat;
+  expose ZFC_DEX_C_LINES as Lines;
+}

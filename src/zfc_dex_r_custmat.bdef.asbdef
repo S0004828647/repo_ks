@@ -1,0 +1,89 @@
+managed implementation in class ZFC_DEX_BP_CUSTMAT unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZFC_DEX_R_CUSTMAT alias Custmat
+persistent table zfc_dex_custmat
+draft table zfc_dex_dcustmat
+etag master Timestamp
+lock master total etag Timestamp
+authorization master ( global )
+
+{
+  field ( mandatory : create )
+  Zzfpa,
+  Vkorg,
+  Zzcma;
+
+  field ( readonly : update )
+  Zzfpa,
+  Vkorg,
+  Zzcma;
+
+
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for ZFC_DEX_CUSTMAT
+  {
+    Zzfpa = zzfpa;
+    Vkorg = vkorg;
+    Zzcma = zzcma;
+    Vtweg = vtweg;
+    ZzCpnStatus = zz_cpn_status;
+    Loaddate = loaddate;
+    CustomerComment = customer_comment;
+    Timestamp = timestamp;
+  }
+  association _Lines { create; with draft; }
+}
+
+define behavior for ZFC_DEX_R_LINES alias Lines
+implementation in class ZFC_DEX_BP_LINES unique
+persistent table zfc_dex_lines
+draft table zfc_dex_dlines
+etag master Timestamp
+lock dependent by _Custmat
+authorization dependent by _Custmat
+
+{
+  field ( readonly )
+  Zzfpa,
+  Vkorg,
+  Zzcma,
+  ZzStartDate;
+
+  update;
+  delete;
+
+  mapping for zfc_dex_lines
+  {
+    Zzfpa = zzfpa;
+    Vkorg = vkorg;
+    Zzcma = zzcma;
+    ZzStartDate = zz_start_date;
+    FiscalMonth = fiscal_month;
+    Vtweg = vtweg;
+    ZzPeriodStatus = zz_period_status;
+    ZzZfcTotal = zz_zfc_total;
+    ZzZorTotal = zz_zor_total;
+    ZzZsbTotal = zz_zsb_total;
+    ZzZkb1Total = zz_zkb1_total;
+    ZzQitOr = zz_qit_or;
+    ZzQitKb = zz_qit_kb;
+    ZzRollingTotal = zz_rolling_total;
+    Meins = meins;
+    PipelineQty = pipeline_qty;
+    Timestamp = timestamp;
+
+  }
+  association _Custmat { with draft; }
+
+}

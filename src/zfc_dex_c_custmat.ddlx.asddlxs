@@ -1,0 +1,148 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'Customer Material',
+    typeNamePlural: 'Customer Materials',
+            title: {
+            type: #STANDARD, value: 'Zzfpa' },
+            description: { value: 'Vkorg' }
+     },
+      presentationVariant: [{
+        sortOrder: [
+        { by: 'Zzfpa',  direction: #ASC },
+        { by: 'Vkorg',  direction: #ASC },
+        { by: 'Zzcma',  direction: #ASC } ],
+        groupBy: [ 'Zzfpa' ],
+        visualizations: [{
+            type: #AS_LINEITEM
+        }]
+        }]
+}
+
+@UI.lineItem: [{criticality: 'ZzCpnCrit'}] //colors whole line
+
+annotate view ZFC_DEX_C_CUSTMAT with
+{
+  @UI.facet: [ {
+    id: 'idIdentification',
+    type: #IDENTIFICATION_REFERENCE,
+    label: 'Custmat',
+    position: 10
+  },
+  {
+      id: 'Line',
+      purpose: #STANDARD,
+      type: #LINEITEM_REFERENCE,
+      label: 'Weekly Figures',
+      position: 20,
+      targetElement: '_Lines'
+  }
+  ]
+
+  @UI.lineItem: [ {
+    position: 10 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.selectionField: [{ position: 10 }]
+  @UI.identification: [ {
+    position: 10 ,
+    label: ''
+  } ]
+  Zzfpa;
+
+  @UI.lineItem: [ {
+    position: 20 ,
+    importance: #MEDIUM,
+    label: 'Vkorg'
+  } ]
+  @UI.selectionField: [{ position: 20 }]
+  @UI.identification: [ {
+    position: 20 ,
+    label: 'Vkorg'
+  } ]
+  Vkorg;
+
+  @UI.lineItem: [ {
+    position: 30 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.selectionField: [{ position: 30 }]
+  @UI.identification: [ {
+    position: 30 ,
+    label: ''
+  } ]
+  Zzcma;
+
+  @UI.lineItem: [ {
+    position: 40 ,
+    importance: #MEDIUM,
+    label: 'Vtweg'
+  } ]
+  @UI.identification: [ {
+    position: 40 ,
+    label: 'Vtweg'
+  } ]
+  Vtweg;
+
+  @UI.lineItem: [ {
+    position: 50 ,
+    criticality: 'ZzCpnCrit',
+    importance: #MEDIUM,
+    label: 'ZzCpnStatus'
+  } ]
+  @UI.selectionField: [{ position: 40 }]
+  @UI.identification: [ {
+    position: 50 ,
+    label: 'ZzCpnStatus'
+  } ]
+  ZzCpnStatus;
+
+  @UI.lineItem: [ {
+    position: 60 ,
+    importance: #MEDIUM,
+    label: 'Loaddate'
+  } ]
+  @UI.selectionField: [{ position: 50 }]
+  @UI.identification: [ {
+    position: 60 ,
+    label: 'Loaddate'
+  } ]
+  Loaddate;
+
+  @UI.lineItem: [ {
+    position: 70 ,
+    importance: #MEDIUM,
+    label: 'CustomerComment'
+  } ]
+  @UI.selectionField: [{ position: 60 }]
+  @UI.identification: [ {
+    position: 70 ,
+    label: 'CustomerComment'
+  } ]
+  CustomerComment;
+
+  //  @UI.lineItem: [ {
+  //    position: 80 ,
+  //    importance: #MEDIUM,
+  //    label: ''
+  //  } ]
+  @UI.identification: [ {
+    position: 80 ,
+    label: ''
+  } ]
+  Timestamp;
+
+  //  @UI.lineItem: [ {
+  //    position: 90 ,
+  //    importance: #MEDIUM,
+  //    label: 'Criticality'
+  //  } ]
+  //  @UI.identification: [ {
+  //    position: 90 ,
+  //    label: 'Criticality'
+  //  } ]
+  //  ZzCpnCrit;
+
+}
